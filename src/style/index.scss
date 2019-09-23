@@ -1,0 +1,12 @@
+@import "./variable.scss";
+*{
+  box-sizing: border-box;
+}
+body {
+  background: #FFF;
+  margin: 10px;
+  padding: 0;
+  #app {
+    width: 100%;
+  }
+}
