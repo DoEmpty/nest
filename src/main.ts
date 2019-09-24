@@ -5,6 +5,7 @@ import router from "./router";
 import store from "./store";
 // import ElementUI from 'element-ui';
 import { Image, Button, Input, Avatar } from "element-ui";
+import "animate.css";
 
 //完整引入element组件
 // Vue.use(ElementUI);
