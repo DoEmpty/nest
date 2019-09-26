@@ -37,44 +37,54 @@
         />
       </template>
     </div>
-    <!-- <transition> -->
-      <ul ref="nav-menu" class="nav-menu animated" v-if="isMobileClient">
+    <transition name="menu-anim">
+      <ul
+        ref="nav-menu"
+        class="nav-menu"
+        v-if="isMobileClient"
+        v-show="isMenuShow"
+      >
         <li>发现</li>
         <li>写文章</li>
         <li>搜索</li>
       </ul>
-    <!-- </transition> -->
+    </transition>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { isMobile } from "@/utils/util";
+import { SET_MASK_VISIBLE } from "@/stores/actionType";
 
-const inAnimClass: String = "bounceInDown";
-const outAnimClass: String = "bounceOutUp";
+const inAnimClass: String = "fadeInDown";
+const outAnimClass: String = "fadeOutUp";
 
 @Component
 export default class Nav extends Vue {
   avatarSrc: String = require("@/assets/logo.png");
   searchKey: String = "";
   isMenuShow: boolean = false;
-  hasMenuIconClick: boolean = false;
 
   get isMobileClient() {
     return isMobile();
   }
 
   toggleMenu() {
-    const menuDom: any = this.$refs["nav-menu"];
+    // const menuDom: any = this.$refs["nav-menu"];
+    // menuDom.style.zIndex = 1000;
+    // this.isMenuShow = !this.isMenuShow;
+    // if (this.isMenuShow) {
+    //   menuDom.classList.remove(inAnimClass);
+    //   menuDom.classList.add(outAnimClass);
+    // } else {
+    //   menuDom.classList.remove(outAnimClass);
+    //   menuDom.classList.add(inAnimClass);
+    // }
     this.isMenuShow = !this.isMenuShow;
-    if (this.isMenuShow) {
-      menuDom.classList.remove(inAnimClass);
-      menuDom.classList.add(outAnimClass);
-    } else {
-      menuDom.classList.remove(outAnimClass);
-      menuDom.classList.add(inAnimClass);
-    }
+    setTimeout(() => {
+      this.$store.commit(SET_MASK_VISIBLE, this.isMenuShow);
+    }, 300);
   }
 }
 </script>
@@ -82,13 +92,19 @@ export default class Nav extends Vue {
 <style lang="scss" scoped>
 @import "@/style/variable.scss";
 .nav {
+  box-shadow: 0px 1px 2px #eee;
+  background: #fff;
   .nav-header {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 0.2rem;
+    font-size: $titleSize;
     color: $lightColor;
+    padding: 0.1rem;
+    position: relative;
+    z-index: $maskZIndex + 2;
+    background: #fff;
     .item {
       margin-left: 0.4rem;
     }
@@ -97,14 +113,11 @@ export default class Nav extends Vue {
       align-items: center;
       color: $primaryColor;
       i {
-        font-size: 0.4rem;
+        font-size: $logoSize;
       }
     }
     .icon-menu {
-      font-size: 0.4rem;
-    }
-    .blank {
-      flex-grow: 1;
+      font-size: $logoSize;
     }
   }
   .nav-menu {
@@ -112,11 +125,27 @@ export default class Nav extends Vue {
     padding: 0;
     margin: 0;
     text-align: center;
-    font-size: 0.2rem;
+    font-size: $titleSize;
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    z-index: $maskZIndex + 1;
     li {
-      padding: 0.2rem 0;
-      border-bottom: 1px solid #EEE;
+      padding: 0.1rem 0;
+      border-bottom: 1px solid #eee;
     }
+  }
+  .menu-anim-enter,
+  .menu-anim-leave-to {
+    top: -100%;
+  }
+  .menu-anim-enter-to,
+  .menu-anim-leave {
+    top: 0.5rem;
+  }
+  .menu-anim-enter-active,
+  .menu-anim-leave-active {
+    transition: top 300ms ease-in-out;
   }
 }
 @media (max-width: 780px) {

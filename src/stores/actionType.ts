@@ -1,0 +1,1 @@
+export const SET_MASK_VISIBLE = "SET_MASK_VISIBLE";

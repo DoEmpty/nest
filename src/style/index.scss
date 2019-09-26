@@ -4,9 +4,16 @@
 }
 body {
   background: #FFF;
-  margin: 10px;
+  margin: 0;
   padding: 0;
-  #app {
+  font-size: 0.18rem;
+  .container{
+    padding: 0 0.1rem;
+    box-sizing: border-box;
     width: 100%;
+  }
+  // 留白撑满
+  .blank {
+    flex-grow: 1;
   }
 }

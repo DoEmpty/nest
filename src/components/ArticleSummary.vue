@@ -1,0 +1,96 @@
+<template>
+  <div class="container">
+    <div class="article">
+      <div class="summary">
+        <div class="title">{{ article.title }}</div>
+        <div class="content">{{ article.content }}</div>
+      </div>
+      <el-image
+        :src="article.imgUrl"
+        fit="contain"
+        lazy
+        :preview-src-list="[article.imgUrl]"
+        class="img"
+      ></el-image>
+    </div>
+    <div class="meta">
+      <span class="praise">
+        <i class="el-icon-star-off" />
+        {{ article.praiseCount || 0 }}
+      </span>
+      <el-divider direction="vertical" />
+      <span>
+        <i class="el-icon-chat-line-round" />
+        {{ article.commentCount || 0 }}
+      </span>
+      <el-divider direction="vertical" />
+      <span>阅读{{ article.readCount || 0 }}</span>
+      <el-divider direction="vertical" />
+      <span>{{ article.author }}</span>
+      <el-divider direction="vertical" />
+      <span class="blank" />
+      <span>{{ article.createTime }}</span>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+import { IArticle } from "@/interface/interface";
+
+@Component
+export default class ArticleSummary extends Vue {
+  @Prop({
+    type: Object,
+    required: true
+  })
+  article: IArticle;
+}
+</script>
+
+<style lang="scss" scoped>
+@import "@/style/variable.scss";
+.container {
+  width: 100%;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  .article {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    .summary {
+      line-height: 0.24rem;
+      .title {
+        font-size: $titleSize;
+        color: $darkColor;
+      }
+      .content {
+        font-size: $contentSize;
+        color: $lightColor;
+        max-height: 0.7rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    .img {
+      flex-shrink: 0;
+      margin-left: 0.1rem;
+      width: 1.5rem;
+      line-height: 1px;
+    }
+  }
+  .meta {
+    color: $lightColor;
+    font-size: $metaSize;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    margin-top: 0.05rem;
+    .praise {
+      color: $primaryColor;
+    }
+  }
+}
+</style>
