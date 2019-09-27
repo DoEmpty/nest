@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Message } from "element-ui";
+import { rewriteMessage } from "@/utils/util";
 
 // create an axios instance
 let service: any = {};
@@ -30,22 +30,14 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   response => {
-    if (+response.data.code !== 200) {
-      Message({
-        message: response.data.msg,
-        type: "error",
-        duration: 3 * 1000
-      });
+    if (+response.status !== 201) {
+      rewriteMessage("请求失败", "error");
     }
-    return response;
+    return response.data;
   },
   error => {
     console.log("err" + error); // for debug
-    Message({
-      message: error.message,
-      type: "error",
-      duration: 5 * 1000
-    });
+    rewriteMessage(error.message, "error");
     return Promise.reject(error);
   }
 );

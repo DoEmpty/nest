@@ -1,17 +1,13 @@
-import { SET_MASK_VISIBLE } from "../actionType";
+import { isMobile } from "@/utils/util";
 
 const common = {
   state: {
-    showMask: false
   },
   getters: {
-    showMask: state => state.showMask
+    isMobile: () => isMobile()
   },
   actions: {},
   mutations: {
-    [SET_MASK_VISIBLE](state: any, visible: boolean) {
-      state.showMask = visible;
-    }
   }
 };
 

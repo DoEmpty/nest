@@ -38,13 +38,8 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { IArticle } from "@/tsConstraint/interface";
-import { mapGetters } from "vuex";
 
-@Component({
-  computed: {
-    ...mapGetters(["isMobile"])
-  }
-})
+@Component
 export default class ArticleSummary extends Vue {
   @Prop({
     type: Object,

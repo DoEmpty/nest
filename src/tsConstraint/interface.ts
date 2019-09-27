@@ -1,3 +1,5 @@
+import { Position } from "./enum";
+
 export interface IArticle {
   id: Number;
   title: String;
