@@ -31,8 +31,6 @@ import Logo from "../Logo.vue";
   }
 })
 export default class Nav extends Vue {
-  avatarSrc: String = require("@/assets/logo.png");
-  searchKey: String = "";
   isMenuShow: boolean = false;
 
   toggleMenu() {
@@ -46,10 +44,10 @@ export default class Nav extends Vue {
 .nav {
   box-shadow: 0px 1px 2px #eee;
   background: #fff;
-  font-size: $titleSize;
+  font-size: $menuSize;
   color: $lightColor;
   display: flex;
-  padding: 0.1rem;
+  padding: 0.1rem 0;
   .icon-menu {
     font-size: $logoSize;
   }

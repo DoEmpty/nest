@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="art-item-container">
     <div class="article">
       <div class="summary">
         <h4 class="title">{{ article.title }}</h4>
@@ -51,7 +51,7 @@ export default class ArticleSummary extends Vue {
 
 <style lang="scss" scoped>
 @import "@/style/variable.scss";
-.container {
+.art-item-container {
   width: 100%;
   padding: 0.2rem 0;
   border-bottom: 1px solid #f0f0f0;
@@ -69,6 +69,7 @@ export default class ArticleSummary extends Vue {
         color: $darkColor;
       }
       .content {
+        margin-top: 0.1rem;
         font-size: $contentSize;
         color: $lightColor;
         max-height: 0.7rem;

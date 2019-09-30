@@ -1,5 +1,6 @@
 import { Message } from "element-ui";
 import { Notify } from "vant";
+import { MessageLevel } from "@/tsConstraint/enum";
 
 export function isMobile(): Boolean {
   return /android|webos|ipod|iphone|blackberry/i.test(
@@ -7,8 +8,11 @@ export function isMobile(): Boolean {
   );
 }
 
-export function rewriteMessage(message: string, type: any) {
-  isMobile() ? Notify({message, type}) : Message({message, type});
+const vantMessageLevel = [ "primary", "success", "warning", "danger" ];
+const elementMessageLevel = [ "", "success", "warning", "error" ];
+export function rewriteMessage(message: string, msgLevel: MessageLevel) {
+  // @ts-ignore 忽略下一行的ts检查
+  isMobile() ? Notify({message, type: vantMessageLevel[msgLevel]}) : Message({message, type: elementMessageLevel[msgLevel]});
 }
 
 // 通过code判断api请求是否成功
@@ -16,7 +20,7 @@ export function apiFilter4Code(response: any, successCode: Number): any {
   if (response.code === successCode) {
     return response.data;
   }
-  rewriteMessage(response.message || "请求失败", "error");
+  rewriteMessage(response.message || "请求失败", MessageLevel.error);
 }
 
 const Week = ["日", "一", "二", "三", "四", "五", "六"];
@@ -72,4 +76,30 @@ export function parseDateToString(
   str = str.replace(/s|S/g, date.getSeconds().toString());
 
   return str;
+}
+
+//获取页面顶部被卷起来的高度
+export function getScrollTop() {
+  return Math.max(
+    //chrome
+    document.body.scrollTop,
+    //firefox/IE
+    document.documentElement.scrollTop
+  );
+}
+
+//获取页面文档的总高度
+export function getDocumentHeight() {
+  //现代浏览器（IE9+和其他浏览器）和IE8的document.body.scrollHeight和document.documentElement.scrollHeight都可以
+  return Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight
+  );
+}
+
+//页面浏览器视口的高度
+export function getWindowHeight() {
+  return document.compatMode === "CSS1Compat"
+    ? document.documentElement.clientHeight
+    : document.body.clientHeight;
 }

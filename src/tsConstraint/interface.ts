@@ -16,3 +16,10 @@ export interface IQuery {
   pageNum: Number;
   pageSize: Number;
 }
+
+export interface IResponse<T> {
+  pageNum: Number;
+  pageSize: Number;
+  totalCount: Number;
+  data: T
+}

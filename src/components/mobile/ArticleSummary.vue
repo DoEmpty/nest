@@ -5,29 +5,24 @@
         <h4 class="title">{{ article.title }}</h4>
         <div class="content">{{ article.content }}</div>
       </div>
-      <el-image
+      <van-image
         :src="article.imgUrl"
-        :data-src="article.imgUrl"
         fit="contain"
-        lazy
-        :preview-src-list="[article.imgUrl]"
         class="img"
         v-if="article.imgUrl"
-      ></el-image>
+        @click="previewImg"
+      ></van-image>
     </div>
     <div class="meta">
-      <span class="praise">
+      <span class="praise divider">
         <i class="el-icon-star-off" />
         {{ article.praiseCount || 0 }}
       </span>
-      <el-divider direction="vertical" />
-      <span>
+      <span class="divider">
         <i class="el-icon-chat-line-round" />
         {{ article.commentCount || 0 }}
       </span>
-      <el-divider direction="vertical" />
-      <span>阅读{{ article.readCount || 0 }}</span>
-      <el-divider direction="vertical" />
+      <span class="divider">阅读{{ article.readCount || 0 }}</span>
       <span>{{ article.author || "佚名" }}</span>
       <span class="blank" />
       <span>{{ article.createTime }}</span>
@@ -38,6 +33,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { IArticle } from "@/tsConstraint/interface";
+import { ImagePreview } from "vant";
 
 @Component
 export default class ArticleSummary extends Vue {
@@ -46,6 +42,13 @@ export default class ArticleSummary extends Vue {
     required: true
   })
   article: IArticle;
+
+  previewImg() {
+    ImagePreview({
+      images: [this.article.imgUrl as string],
+      startPosition: 0
+    })
+  }
 }
 </script>
 
@@ -92,6 +95,11 @@ export default class ArticleSummary extends Vue {
     margin-top: 0.05rem;
     .praise {
       color: $primaryColor;
+    }
+    .divider {
+      border-right: 0.01rem solid #DCDFE6;
+      padding-right: 0.05rem;
+      margin-right: 0.05rem;
     }
   }
 }

@@ -2,22 +2,26 @@
 *{
   box-sizing: border-box;
 }
-body {
-  background: #FFF;
-  margin: 0;
-  padding: 0;
-  font-size: 0.18rem;
-  .container{
-    padding: 0 0.1rem;
-    box-sizing: border-box;
-    width: 100%;
-  }
-  // 留白撑满
-  .blank {
-    flex-grow: 1;
-  }
-  h1,h2,h3,h4,h5,p{
+html{
+  height: 100%;
+  body {
+    background: #FFF;
     margin: 0;
     padding: 0;
+    font-size: 0.18rem;
+    height: 100%;
+    .container{
+      padding: 0 0.1rem;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    // 留白撑满
+    .blank {
+      flex-grow: 1;
+    }
+    h1,h2,h3,h4,h5,p{
+      margin: 0;
+      padding: 0;
+    }
   }
 }

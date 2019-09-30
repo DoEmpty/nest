@@ -1,5 +1,6 @@
 import axios from "axios";
 import { rewriteMessage } from "@/utils/util";
+import { MessageLevel } from "@/tsConstraint/enum";
 
 // create an axios instance
 let service: any = {};
@@ -30,14 +31,14 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   response => {
-    if (+response.status !== 201) {
-      rewriteMessage("请求失败", "error");
+    if (+response.status !== 200) {
+      rewriteMessage("请求失败", MessageLevel.error);
     }
     return response.data;
   },
   error => {
     console.log("err" + error); // for debug
-    rewriteMessage(error.message, "error");
+    rewriteMessage(error.message, MessageLevel.error);
     return Promise.reject(error);
   }
 );

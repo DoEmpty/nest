@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <Nav />
     <router-view />
   </div>
@@ -16,9 +16,17 @@ const isMobile = store.getters.isMobile;
   }
 })
 export default class App extends Vue {
+  mounted() {
+    // @ts-ignore
+    window.vm = this;
+  }
 }
 </script>
 
 <style lang="scss">
-@import "@/style/variable.scss";
+.container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 </style>
