@@ -39,7 +39,7 @@ export default class Home extends Vue {
       // console.log("getScrollTop()",this.getScrollTop());
       // console.log("getWindowHeight()",this.getWindowHeight());
       // console.log("getScrollHeight()",this.getScrollHeight());
-      if(this.getScrollTop() + this.getWindowHeight() < this.getScrollHeight() && !this.loadFinished){
+      if(this.getScrollTop() + this.getWindowHeight() >= this.getScrollHeight() - 10 && !this.loadFinished){
         console.log("到页面底部了");
         this.queryArticle();
       }
