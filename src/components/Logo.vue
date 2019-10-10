@@ -1,7 +1,7 @@
 <template>
   <div class="logo">
     <i class="el-icon-s-promotion" />
-    <span>Empty的小窝</span>
+    <span>小窝</span>
   </div>
 </template>
 

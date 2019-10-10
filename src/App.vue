@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Nav />
+    <nav v-if="!hideNav" />
     <router-view />
   </div>
 </template>
@@ -19,6 +19,11 @@ export default class App extends Vue {
   mounted() {
     // @ts-ignore
     window.vm = this;
+  }
+  
+  get hideNav(){
+    const navHideRoutes = ["login", "regist"]
+    return navHideRoutes.indexOf(this.$route.name) > -1;
   }
 }
 </script>

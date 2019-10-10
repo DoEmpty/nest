@@ -8,6 +8,7 @@ module.exports = {
   //   }
   // },
   devServer: {
+    port: 9091,
     proxy: {
       "/api": {
         target: "http://biaochenxuying.cn",

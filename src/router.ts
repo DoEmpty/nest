@@ -12,6 +12,23 @@ export default new Router({
       path: "/",
       name: "home",
       component: () => isMobile ? import("./views/mobile/Home.vue") : import("./views/pc/Home.vue")
+    },
+    {
+      path: "/account",
+      name: "account",
+      component: () => isMobile ? import("./views/mobile/Login.vue") : import("./views/pc/account/Index.vue"),
+      children: [
+        {
+          path: "login",
+          name: "login",
+          component: () => import("./views/pc/account/Login.vue")
+        },
+        {
+          path: "regist",
+          name: "regist",
+          component: () => import("./views/pc/account/Regist.vue")
+        }
+      ]
     }
   ]
 });
