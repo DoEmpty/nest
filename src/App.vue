@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <nav v-if="!hideNav" />
+    <Nav v-if="!hideNav" />
     <router-view />
   </div>
 </template>

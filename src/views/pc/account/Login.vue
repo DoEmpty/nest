@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login-container">
     <el-input placeholder="输入昵称" v-model="nickName">
       <template v-slot:prepend>
         <i class="el-icon-user" />
@@ -10,6 +10,10 @@
         <i class="el-icon-key" />
       </template>
     </el-input>
+    <div class="remb-forg">
+      <el-checkbox v-model="rememberMe">记住我</el-checkbox>
+      <el-link type="primary">忘记密码？</el-link>
+    </div>
     <el-button size="medium" type="primary" round>登录</el-button>
     <el-divider>社交帐号登录</el-divider>
     <div class="ic-social">
@@ -35,30 +39,38 @@ export default class Login extends Vue{
 
   nickName: String = "";
   password: String = "";
+  rememberMe: Boolean = false;
 }
 </script>
 
 <style lang="scss" scoped>
 @import "@/style/variable.scss";
-.el-input{
-  font-size: $titleSize;
-  margin-top: 0.2rem;
-}
-.el-button{
-  font-size: $titleSize;
-  width: 100%;
-  margin-top: 0.2rem;
-}
-.el-divider__text{
-  font-size: $metaSize;
-  color: $lightColor;
-}
-.ic-social{
-  display: flex;
-  justify-content: space-around;
-  cursor: pointer;
-  img{
-    width: 0.5rem;
+.login-container{
+  .el-input{
+    font-size: $titleSize;
+    margin-top: 0.2rem;
+  }
+  .el-button{
+    font-size: $titleSize;
+    width: 100%;
+    margin-top: 0.2rem;
+  }
+  .el-divider__text{
+    font-size: $metaSize;
+    color: $lightColor;
+  }
+  .ic-social{
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+    img{
+      width: 0.5rem;
+    }
+  }
+  .remb-forg{
+    margin-top: 0.2rem;
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>

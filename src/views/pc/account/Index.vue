@@ -41,7 +41,7 @@ export default class Account extends Vue {
   .account-container{
     background: #fff;
     width: 4rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0.4rem;
     border-radius: 0.04rem;
     box-shadow: 0 0 0.08rem rgb(0,0,0,.1);
     .el-tabs__item{

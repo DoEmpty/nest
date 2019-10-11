@@ -11,7 +11,9 @@ import {
   DropdownItem, 
   DropdownMenu,
   Tabs,
-  TabPane
+  TabPane,
+  Checkbox,
+  Link
 } from "element-ui";
 
 Vue.prototype.$ELEMENT = { zIndex: 9999 };
@@ -26,5 +28,7 @@ Vue.use(DropdownItem);
 Vue.use(DropdownMenu);
 Vue.use(Tabs);
 Vue.use(TabPane);
+Vue.use(Checkbox);
+Vue.use(Link);
 
 console.log("use pc ui");

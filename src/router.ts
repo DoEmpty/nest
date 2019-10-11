@@ -16,7 +16,7 @@ export default new Router({
     {
       path: "/account",
       name: "account",
-      component: () => isMobile ? import("./views/mobile/Login.vue") : import("./views/pc/account/Index.vue"),
+      component: () => import("./views/pc/account/Index.vue"),
       children: [
         {
           path: "login",
