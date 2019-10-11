@@ -5,7 +5,8 @@
         v-model="moreLoading"
         :finished="moreFinished"
         finished-text="没有更多了"
-        @load="loadMore">
+        @load="loadMore"
+      >
         <ArticleSummary
           v-for="article in articles"
           v-bind:key="article.id"
@@ -45,18 +46,18 @@ export default class Home extends Vue {
     this.articles = [];
     getArticles(this.query).then(res => {
       this.articles = res.data;
-      this.query.pageNum = this.query.pageNum as number + 1;
+      this.query.pageNum = (this.query.pageNum as number) + 1;
     });
   }
 
   loadMore() {
     getArticles(this.query).then(res => {
       this.moreLoading = false;
-      if(this.articles.length >= res.totalCount || res.data.length === 0){
+      if (this.articles.length >= res.totalCount || res.data.length === 0) {
         this.moreFinished = true;
         return;
       }
-      this.query.pageNum = this.query.pageNum as number + 1;
+      this.query.pageNum = (this.query.pageNum as number) + 1;
       this.articles = this.articles.concat(res.data);
     });
   }

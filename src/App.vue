@@ -12,24 +12,27 @@ import store from "@/stores";
 const isMobile = store.getters.isMobile;
 @Component({
   components: {
-    Nav: isMobile ? require("@/components/mobile/Nav.vue").default : require("@/components/pc/Nav.vue").default
+    Nav: isMobile
+      ? require("@/components/mobile/Nav.vue").default
+      : require("@/components/pc/Nav.vue").default
   }
 })
 export default class App extends Vue {
   mounted() {
     // @ts-ignore
     window.vm = this;
+    this.$store.dispatch("user/checkLogin");
   }
-  
-  get hideNav(){
-    const navHideRoutes = ["login", "regist"]
+
+  get hideNav() {
+    const navHideRoutes = ["login", "regist"];
     return navHideRoutes.indexOf(this.$route.name) > -1;
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.container{
+.container {
   display: flex;
   flex-direction: column;
 }

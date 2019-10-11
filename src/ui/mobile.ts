@@ -1,5 +1,13 @@
 import Vue from "vue";
-import { Popup, Image, Search, ImagePreview, Divider, List, PullRefresh } from "vant";
+import {
+  Popup,
+  Image,
+  Search,
+  ImagePreview,
+  Divider,
+  List,
+  PullRefresh
+} from "vant";
 import "vant/lib/popup/style";
 import "vant/lib/image/style";
 import "vant/lib/notify/style";

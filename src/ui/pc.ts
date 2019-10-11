@@ -1,19 +1,20 @@
 import Vue from "vue";
-import { 
-  Image, 
-  Button, 
-  Input, 
-  Avatar, 
-  Divider, 
-  Message, 
-  Loading, 
-  Dropdown, 
-  DropdownItem, 
+import {
+  Image,
+  Button,
+  Input,
+  Avatar,
+  Divider,
+  Message,
+  Loading,
+  Dropdown,
+  DropdownItem,
   DropdownMenu,
   Tabs,
   TabPane,
   Checkbox,
-  Link
+  Link,
+  ButtonGroup
 } from "element-ui";
 
 Vue.prototype.$ELEMENT = { zIndex: 9999 };
@@ -30,5 +31,6 @@ Vue.use(Tabs);
 Vue.use(TabPane);
 Vue.use(Checkbox);
 Vue.use(Link);
+Vue.use(ButtonGroup);
 
 console.log("use pc ui");

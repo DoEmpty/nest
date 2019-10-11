@@ -2,7 +2,9 @@ import * as httpService from "@/utils/httpService";
 import { IQuery, IArticle, IResponse } from "@/tsConstraint/interface";
 import { apiFilter4Code, parseDateToString } from "@/utils/util";
 
-export const getArticles = (query: IQuery): Promise<IResponse<Array<IArticle>>> => {
+export const getArticles = (
+  query: IQuery
+): Promise<IResponse<Array<IArticle>>> => {
   return httpService
     .Get("/getArticleList", { ...query, state: 1 })
     .then(res => {

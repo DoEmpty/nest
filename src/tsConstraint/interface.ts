@@ -21,5 +21,5 @@ export interface IResponse<T> {
   pageNum: Number;
   pageSize: Number;
   totalCount: Number;
-  data: T
+  data: T;
 }

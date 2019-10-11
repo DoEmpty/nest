@@ -23,10 +23,17 @@
         <i class="el-icon-key" />
       </template>
     </el-input>
-    <el-button size="medium" type="primary" round class="reg-btn">注册</el-button>
+    <el-button size="medium" type="success" round class="reg-btn">
+      注册
+    </el-button>
     <el-divider>社交帐号注册</el-divider>
     <div class="ic-social">
-      <img v-for="(item, index) in socialIcons" :key="index" :src="item.icon" alt="">
+      <img
+        v-for="(item, index) in socialIcons"
+        :key="index"
+        :src="item.icon"
+        alt=""
+      />
     </div>
   </div>
 </template>
@@ -34,7 +41,7 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 @Component
-export default class Regist extends Vue{
+export default class Regist extends Vue {
   socialIcons: Array<any> = [
     {
       name: "weibo",
@@ -43,7 +50,7 @@ export default class Regist extends Vue{
     {
       name: "wechat",
       icon: require("@/assets/wechat.svg")
-    },
+    }
   ];
 
   nickName: String = "";
@@ -56,30 +63,30 @@ export default class Regist extends Vue{
 
 <style lang="scss" scoped>
 @import "@/style/variable.scss";
-.regist-container{
-  .el-input{
+.regist-container {
+  .el-input {
     font-size: $titleSize;
     margin-top: 0.2rem;
   }
-  .reg-btn{
+  .reg-btn {
     font-size: $titleSize;
     width: 100%;
     margin-top: 0.2rem;
   }
-  .el-divider__text{
+  .el-divider__text {
     font-size: $metaSize;
     color: $lightColor;
   }
-  .ic-social{
+  .ic-social {
     display: flex;
     justify-content: space-around;
     cursor: pointer;
-    img{
+    img {
       width: 0.5rem;
     }
   }
-  .el-input-group__append{
-    .el-button{
+  .el-input-group__append {
+    .el-button {
       font-size: 0.13rem;
       padding: 0 0.05rem;
     }

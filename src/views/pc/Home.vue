@@ -6,7 +6,7 @@
       :article="article"
     />
     <p v-if="isLoading">
-      <i class="el-icon-loading"/>
+      <i class="el-icon-loading" />
       加载中...
     </p>
     <p v-if="loadFinished">没有更多了</p>
@@ -35,15 +35,19 @@ export default class Home extends Vue {
 
   mounted() {
     this.queryArticle();
-    window.onscroll = (e) => {
+    window.onscroll = e => {
       // console.log("getScrollTop()",this.getScrollTop());
       // console.log("getWindowHeight()",this.getWindowHeight());
       // console.log("getScrollHeight()",this.getScrollHeight());
-      if(this.getScrollTop() + this.getWindowHeight() >= this.getScrollHeight() - 10 && !this.loadFinished){
+      if (
+        this.getScrollTop() + this.getWindowHeight() >=
+          this.getScrollHeight() - 10 &&
+        !this.loadFinished
+      ) {
         console.log("到页面底部了");
         this.queryArticle();
       }
-    }
+    };
   }
 
   // 获取滚动高度
@@ -57,29 +61,31 @@ export default class Home extends Vue {
   getScrollHeight() {
     const bodyScrollHeight = document.body.scrollHeight;
     const eleScrollHeight = document.documentElement.scrollHeight;
-    return bodyScrollHeight - eleScrollHeight > 0 ? bodyScrollHeight : eleScrollHeight; 
+    return bodyScrollHeight - eleScrollHeight > 0
+      ? bodyScrollHeight
+      : eleScrollHeight;
   }
 
   //获取窗口高度
   getWindowHeight() {
-    if(document.compatMode === "CSS1Compat"){
+    if (document.compatMode === "CSS1Compat") {
       return document.documentElement.clientHeight;
     }
     return document.body.clientHeight;
   }
 
   queryArticle() {
-    if(this.isLoading || this.loadFinished){
+    if (this.isLoading || this.loadFinished) {
       return;
     }
     this.isLoading = true;
     getArticles(this.query).then(res => {
       this.isLoading = false;
-      if(this.articles.length >= res.totalCount || res.data.length === 0){
+      if (this.articles.length >= res.totalCount || res.data.length === 0) {
         this.loadFinished = true;
         return;
       }
-      this.query.pageNum = this.query.pageNum as number + 1;
+      this.query.pageNum = (this.query.pageNum as number) + 1;
       this.articles = this.articles.concat(res.data);
     });
   }
@@ -88,9 +94,9 @@ export default class Home extends Vue {
 
 <style lang="scss" scoped>
 @import "@/style/variable.scss";
-.home-container{
+.home-container {
   flex-grow: 1;
-  p{
+  p {
     text-align: center;
     color: $lightColor;
     margin: 0.1rem 0;

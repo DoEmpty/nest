@@ -8,11 +8,11 @@ export function isMobile(): Boolean {
   );
 }
 
-const vantMessageLevel = [ "primary", "success", "warning", "danger" ];
-const elementMessageLevel = [ "", "success", "warning", "error" ];
+const vantMessageLevel = ["primary", "success", "warning", "danger"];
+const elementMessageLevel = ["", "success", "warning", "error"];
 export function rewriteMessage(message: string, msgLevel: MessageLevel) {
   // @ts-ignore 忽略下一行的ts检查
-  isMobile() ? Notify({message, type: vantMessageLevel[msgLevel]}) : Message({message, type: elementMessageLevel[msgLevel]});
+  isMobile() ? Notify({ message, type: vantMessageLevel[msgLevel] }) : Message({ message, type: elementMessageLevel[msgLevel] });// eslint-disable-line
 }
 
 // 通过code判断api请求是否成功

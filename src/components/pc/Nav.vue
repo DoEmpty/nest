@@ -1,15 +1,12 @@
 <template>
   <div class="nav">
-    <div
-      class="nav-header"
-      style="min-width:780px"
-    >
+    <div class="nav-header" style="min-width:780px">
       <logo />
-      <div class="item" :class="'home'===routeName?'active':''">
+      <div class="item" :class="'home' === routeName ? 'active' : ''">
         <i class="el-icon-discover"></i>
         <span>首页</span>
       </div>
-      <div class="item" :class="'writer'===routeName?'active':''">
+      <div class="item" :class="'writer' === routeName ? 'active' : ''">
         <i class="el-icon-edit"></i>
         <span>写文章</span>
       </div>
@@ -23,7 +20,11 @@
         />
       </div>
       <span class="blank"></span>
-      <nav-avatar />
+      <nav-avatar v-if="isLogin" />
+      <el-button-group v-else>
+        <el-button type="primary" @click="handleLogin">登录</el-button>
+        <el-button type="success" @click="handleRegist">注册</el-button>
+      </el-button-group>
     </div>
   </div>
 </template>
@@ -32,11 +33,15 @@
 import { Component, Vue } from "vue-property-decorator";
 import Logo from "../Logo.vue";
 import NavAvatar from "../pc/NavAvatar.vue";
+import { mapGetters } from "vuex";
 
 @Component({
-  components:{
+  components: {
     Logo,
     NavAvatar
+  },
+  computed: {
+    ...mapGetters({ isLogin: "user/isLogin" })
   }
 })
 export default class Nav extends Vue {
@@ -44,6 +49,18 @@ export default class Nav extends Vue {
 
   get routeName() {
     return this.$route.name;
+  }
+
+  handleLogin() {
+    this.$router.push({
+      name: "login"
+    });
+  }
+
+  handleRegist() {
+    this.$router.push({
+      name: "regist"
+    });
   }
 }
 </script>

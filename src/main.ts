@@ -4,7 +4,7 @@ import router from "./router";
 import store from "./stores";
 import App from "./App.vue";
 
-if(store.getters.isMobile) {
+if (store.getters.isMobile) {
   require("@/ui/mobile");
 } else {
   require("@/ui/pc");

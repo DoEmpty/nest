@@ -47,7 +47,7 @@ export default class ArticleSummary extends Vue {
     ImagePreview({
       images: [this.article.imgUrl as string],
       startPosition: 0
-    })
+    });
   }
 }
 </script>
@@ -97,7 +97,7 @@ export default class ArticleSummary extends Vue {
       color: $primaryColor;
     }
     .divider {
-      border-right: 0.01rem solid #DCDFE6;
+      border-right: 0.01rem solid #dcdfe6;
       padding-right: 0.05rem;
       margin-right: 0.05rem;
     }

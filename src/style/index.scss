@@ -11,9 +11,12 @@ html{
     font-size: 0.18rem;
     height: 100%;
     .container{
-      padding: 0 0.1rem;
       box-sizing: border-box;
       width: 100%;
+      height: 100%;
+      >div{
+        padding: 0 0.1rem;
+      }
     }
     // 留白撑满
     .blank {

@@ -7,12 +7,8 @@
       class="icon-menu"
       @click="toggleMenu"
     />
-    <van-popup
-      v-model="isMenuShow"
-      position="top">
-      <ul
-        class="nav-menu"
-      >
+    <van-popup v-model="isMenuShow" position="top">
+      <ul class="nav-menu">
         <li>发现</li>
         <li>写文章</li>
         <li>搜索</li>
@@ -26,7 +22,7 @@ import { Component, Vue } from "vue-property-decorator";
 import Logo from "../Logo.vue";
 
 @Component({
-  components:{
+  components: {
     Logo
   }
 })
