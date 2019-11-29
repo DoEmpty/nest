@@ -39,7 +39,8 @@ export default class Home extends Vue {
   refreshLoading: boolean = false;
 
   mounted() {}
-
+  
+  //不添加权限修饰符，默认是public的 
   loadRefresh() {
     this.refreshLoading = false;
     this.query.pageNum = 1;
@@ -56,7 +57,7 @@ export default class Home extends Vue {
       if (this.articles.length >= res.totalCount || res.data.length === 0) {
         this.moreFinished = true;
         return;
-      }
+      } 
       this.query.pageNum = (this.query.pageNum as number) + 1;
       this.articles = this.articles.concat(res.data);
     });

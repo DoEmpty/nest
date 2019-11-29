@@ -14,7 +14,9 @@ import {
   TabPane,
   Checkbox,
   Link,
-  ButtonGroup
+  ButtonGroup,
+  Form,
+  FormItem
 } from "element-ui";
 
 Vue.prototype.$ELEMENT = { zIndex: 9999 };
@@ -32,5 +34,7 @@ Vue.use(TabPane);
 Vue.use(Checkbox);
 Vue.use(Link);
 Vue.use(ButtonGroup);
+Vue.use(Form);
+Vue.use(FormItem);
 
 console.log("use pc ui");

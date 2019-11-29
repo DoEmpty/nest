@@ -12,7 +12,8 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import store from "../../stores";
 
 @Component({
   methods: {
@@ -20,10 +21,12 @@ import { mapActions } from "vuex";
   }
 })
 export default class NavAvatar extends Vue {
-  avatarSrc: String = require("@/assets/logo.png");
+  get avatarSrc() {
+    return this.$store.getters["user/userInfo"]("avatar");
+  }
 
   handleMenuClick(command) {
-    if(command === "logout") {
+    if (command === "logout") {
       // @ts-ignore
       this.logout();
     }
