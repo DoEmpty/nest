@@ -3,7 +3,9 @@ import Router from "vue-router";
 import store from "@/stores";
 
 Vue.use(Router);
+
 const isMobile = store.getters.isMobile;
+
 export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
@@ -13,23 +15,29 @@ export default new Router({
       name: "home",
       component: () =>
         isMobile
-          ? import("./views/mobile/Home.vue")
-          : import("./views/pc/Home.vue")
+          ? import("./pages/mobile/Home.vue")
+          : import("./pages/pc/Home.vue")
+    },
+    {
+      path: "/article/:id",
+      name: "article",
+      component: () => import("./pages/pc/ArticleDetail.vue"),
+      props: true
     },
     {
       path: "/account",
       name: "account",
-      component: () => import("./views/pc/account/Index.vue"),
+      component: () => import("./pages/pc/account/Index.vue"),
       children: [
         {
           path: "login",
           name: "login",
-          component: () => import("./views/pc/account/Login.vue")
+          component: () => import("./pages/pc/account/Login.vue")
         },
         {
           path: "regist",
           name: "regist",
-          component: () => import("./views/pc/account/Regist.vue")
+          component: () => import("./pages/pc/account/Regist.vue")
         }
       ]
     }

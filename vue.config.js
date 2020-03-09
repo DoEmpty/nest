@@ -7,6 +7,7 @@ module.exports = {
   //     }
   //   }
   // },
+  assetsDir: "static",
   devServer: {
     port: 9091,
     proxy: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container">
+  <div class="container">
     <el-input placeholder="输入昵称" v-model="nickName">
       <template v-slot:prepend>
         <i class="el-icon-user" />
@@ -57,12 +57,20 @@ export default class Login extends Vue {
     this.login();
     this.$router.back();
   }
+
+  mounted() {
+    const timer = setInterval(() => console.log(new Date()), 1000);
+    this.$once("hook:beforeDestroy", () => {
+      console.log("clearinterval");
+      clearInterval(timer);
+    });
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "@/style/variable.scss";
-.login-container {
+.container {
   .el-input {
     font-size: $titleSize;
     margin-top: 0.2rem;

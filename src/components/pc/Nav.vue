@@ -1,8 +1,12 @@
 <template>
   <div class="nav">
-    <div class="nav-header" style="min-width:780px">
-      <logo />
-      <div class="item" :class="'home' === routeName ? 'active' : ''">
+    <logo class="nav-logo" />
+    <div class="nav-items">
+      <div
+        class="item"
+        :class="'home' === routeName ? 'active' : ''"
+        @click="handleToHome"
+      >
         <i class="el-icon-discover"></i>
         <span>首页</span>
       </div>
@@ -20,17 +24,17 @@
         />
       </div>
       <span class="blank"></span>
-      <nav-avatar v-if="isLogin" />
-      <el-button-group v-else>
-        <el-button type="primary" @click="handleLogin">登录</el-button>
-        <el-button type="success" @click="handleRegist">注册</el-button>
-      </el-button-group>
     </div>
+    <nav-avatar class="nav-group" v-if="isLogin" v-bind="$attrs" />
+    <el-button-group class="nav-group" v-else>
+      <el-button type="primary" @click="handleLogin">登录</el-button>
+      <el-button type="success" @click="handleRegist">注册</el-button>
+    </el-button-group>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 import Logo from "../Logo.vue";
 import NavAvatar from "../pc/NavAvatar.vue";
 import { mapGetters } from "vuex";
@@ -62,6 +66,16 @@ export default class Nav extends Vue {
       name: "regist"
     });
   }
+
+  handleToHome() {
+    if (this.routeName === "home") {
+      window.location.reload();
+    } else {
+      this.$router.push({
+        name: "home"
+      });
+    }
+  }
 }
 </script>
 
@@ -70,19 +84,24 @@ export default class Nav extends Vue {
 .nav {
   box-shadow: 0px 1px 2px #eee;
   background: #fff;
-  .nav-header {
-    width: 100%;
+  top: 0;
+  border-bottom: 1px solid #f0f0f0;
+  width: 100%;
+  height: 0.6rem;
+  font-size: $menuSize;
+  color: $lightColor;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  z-index: $maskZIndex + 2;
+  position: fixed;
+  .nav-items {
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: $menuSize;
-    color: $lightColor;
-    padding: 0.1rem 0;
-    position: relative;
-    z-index: $maskZIndex + 2;
-    background: #fff;
+    margin: 0 auto;
     .item {
-      margin-left: 0.4rem;
+      margin-right: 0.4rem;
       cursor: pointer;
       span {
         margin-left: 0.05rem;
@@ -91,9 +110,27 @@ export default class Nav extends Vue {
     .active {
       color: $primaryColor;
     }
-    .icon-menu {
-      font-size: $logoSize;
-    }
+  }
+  .nav-logo {
+    position: absolute;
+  }
+  .nav-group {
+    position: absolute;
+    top: 0.05rem;
+    right: 0.5rem;
+  }
+  > * {
+    transition: top 0.5s;
+  }
+}
+@media (min-width: 1080px) {
+  .nav-items {
+    width: 960px;
+  }
+}
+@media (max-width: 1080px) {
+  .nav-items {
+    width: 760px;
   }
 }
 @media (max-width: 780px) {

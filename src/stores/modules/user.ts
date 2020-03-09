@@ -1,4 +1,4 @@
-import { TOKEN_KEY } from "@/utils/config";
+import { TOKEN_KEY, LOGIN_USER_INFO } from "@/utils/config";
 import { SET_TOKEN, SET_USER_INFO } from "../actionType";
 
 // user store注册了独立的命名空间
@@ -27,6 +27,10 @@ export default {
       const token = localStorage.getItem(TOKEN_KEY);
       commit(SET_TOKEN, token);
     },
+    getUserInfo({ commit }) {
+      const userInfo = localStorage.getItem(LOGIN_USER_INFO);
+      commit(SET_USER_INFO, JSON.parse(userInfo));
+    },
     //Action 函数接受一个与 store 实例具有相同方法和属性的 context 对象，因此你可以调用 context.commit 提交一个 mutation，或者通过 context.state 和 context.getters 来获取 state 和 getters
     login(context) {
       //发起http请求
@@ -35,6 +39,7 @@ export default {
         avatar: require("@/assets/logo.png")
       };
       context.commit(SET_USER_INFO, userInfo);
+      localStorage.setItem(LOGIN_USER_INFO, JSON.stringify(userInfo));
 
       const token = "wodenglula";
       context.commit(SET_TOKEN, token);

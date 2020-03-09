@@ -2,7 +2,7 @@
   <div class="art-item-container">
     <div class="article">
       <div class="summary">
-        <h4 class="title">{{ article.title }}</h4>
+        <h4 class="title" @click="handleTitleClick">{{ article.title }}</h4>
         <div class="content">{{ article.content }}</div>
       </div>
       <el-image
@@ -46,6 +46,10 @@ export default class ArticleSummary extends Vue {
     required: true
   })
   article: IArticle;
+
+  handleTitleClick() {
+    this.$router.push({ path: `/article/${this.article.id}` });
+  }
 }
 </script>
 
@@ -67,6 +71,7 @@ export default class ArticleSummary extends Vue {
       .title {
         font-size: $titleSize;
         color: $darkColor;
+        cursor: pointer;
       }
       .content {
         margin-top: 0.1rem;

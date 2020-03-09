@@ -1,27 +1,18 @@
 <template>
-  <div class="container">
-    <Nav v-if="!hideNav" />
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import store from "@/stores";
 
-const isMobile = store.getters.isMobile;
-@Component({
-  components: {
-    Nav: isMobile
-      ? require("@/components/mobile/Nav.vue").default
-      : require("@/components/pc/Nav.vue").default
-  }
-})
+@Component
 export default class App extends Vue {
   mounted() {
     // @ts-ignore
     window.vm = this;
     this.$store.dispatch("user/checkLogin");
+    this.$store.dispatch("user/getUserInfo");
   }
 
   get hideNav() {
@@ -30,10 +21,3 @@ export default class App extends Vue {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.container {
-  display: flex;
-  flex-direction: column;
-}
-</style>

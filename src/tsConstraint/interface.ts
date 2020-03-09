@@ -1,7 +1,7 @@
 import { Position } from "./enum";
 
 export interface IArticle {
-  id: Number;
+  id: String | Number;
   title: String;
   content: String;
   imgUrl: String;
@@ -9,6 +9,7 @@ export interface IArticle {
   readCount?: Number;
   commentCount?: Number;
   author: String;
+  authorAvatar?: String;
   createTime: String;
 }
 

@@ -21,10 +21,38 @@ export const getArticles = (
             content: x.desc,
             imgUrl: x.img_url.replace(/\?[\w|\W]*/, ""),
             authro: "",
-            createTime: parseDateToString(x.create_time, "yyyy/MM/dd HH:mm")
+            createTime: parseDateToString(x.create_time, "yyyy/MM/dd HH:mm"),
+            praiseCount: x.meta.likes,
+            readCount: x.meta.views,
+            commentCount: x.meta.comments
           };
         })
       };
       return resp;
+    });
+};
+
+export const getArticleById = (id: string): Promise<IResponse<IArticle>> => {
+  return httpService
+    .Post("/getArticleDetail", { id })
+    .then(res => {
+      return apiFilter4Code(res, 0);
+    })
+    .then(res => {
+      return {
+        data: {
+          id: res._id,
+          title: res.title,
+          content: res.content,
+          imgUrl: res.img_url,
+          praiseCount: res.meta.likes,
+          readCount: res.meta.views,
+          commentCount: res.meta.comments,
+          author: res.author,
+          authorAvatar:
+            "http://t8.baidu.com/it/u=3571592872,3353494284&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1583983486&t=f297e9712df0380a261c2278caf5630e",
+          createTime: res.create_time
+        }
+      };
     });
 };

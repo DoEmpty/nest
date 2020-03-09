@@ -38,13 +38,12 @@ export function parseDateToString(
       : "0" + (date.getFullYear() % 100)
   );
 
+  const month = date.getMonth() + 1;
   str = str.replace(
     /MM/,
-    date.getMonth() > 9
-      ? date.getMonth().toString()
-      : "0" + date.getMonth().toString()
+    month > 9 ? month.toString() : "0" + month.toString()
   );
-  str = str.replace(/M/g, date.getMonth().toString());
+  str = str.replace(/M/g, month.toString());
 
   str = str.replace(/w|W/g, Week[date.getDay()]);
 
@@ -78,28 +77,38 @@ export function parseDateToString(
   return str;
 }
 
-//获取页面顶部被卷起来的高度
-export function getScrollTop() {
-  return Math.max(
-    //chrome
-    document.body.scrollTop,
-    //firefox/IE
-    document.documentElement.scrollTop
-  );
+// 获取滚动高度
+function getScrollTop(): number {
+  const bodyScrollTop = document.body.scrollTop;
+  const eleScrollTop = document.documentElement.scrollTop;
+  return bodyScrollTop || eleScrollTop;
 }
 
-//获取页面文档的总高度
-export function getDocumentHeight() {
-  //现代浏览器（IE9+和其他浏览器）和IE8的document.body.scrollHeight和document.documentElement.scrollHeight都可以
-  return Math.max(
-    document.body.scrollHeight,
-    document.documentElement.scrollHeight
-  );
+//获取文档总高度
+function getScrollHeight(): number {
+  const bodyScrollHeight = document.body.scrollHeight;
+  const eleScrollHeight = document.documentElement.scrollHeight;
+  return bodyScrollHeight - eleScrollHeight > 0
+    ? bodyScrollHeight
+    : eleScrollHeight;
 }
 
-//页面浏览器视口的高度
-export function getWindowHeight() {
-  return document.compatMode === "CSS1Compat"
-    ? document.documentElement.clientHeight
-    : document.body.clientHeight;
+//获取窗口高度
+function getWindowHeight(): number {
+  if (document.compatMode === "CSS1Compat") {
+    return document.documentElement.clientHeight;
+  }
+  return document.body.clientHeight;
+}
+
+export function registScrollEvent(callback): void {
+  window.onscroll = () => {
+    const scrollParam = {
+      scrollTop: getScrollTop(),
+      scrollHeight: getScrollHeight(),
+      windowHeight: getWindowHeight()
+    };
+    console.log(scrollParam);
+    callback(scrollParam);
+  };
 }

@@ -1,4 +1,5 @@
 import Vue from "vue";
+import "mavon-editor/dist/css/index.css";
 import {
   Image,
   Button,
@@ -18,6 +19,7 @@ import {
   Form,
   FormItem
 } from "element-ui";
+import mavonEditor from "mavon-editor";
 
 Vue.prototype.$ELEMENT = { zIndex: 9999 };
 Vue.use(Image);
@@ -36,5 +38,7 @@ Vue.use(Link);
 Vue.use(ButtonGroup);
 Vue.use(Form);
 Vue.use(FormItem);
+
+Vue.use(mavonEditor);
 
 console.log("use pc ui");

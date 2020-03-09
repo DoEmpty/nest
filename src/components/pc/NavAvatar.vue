@@ -1,11 +1,16 @@
 <template>
   <el-dropdown @command="handleMenuClick">
-    <el-avatar size="large" shape="circle" :src="avatarSrc" />
+    <div class="avatar-down">
+      <el-avatar size="large" shape="circle" :src="avatarSrc" />
+      <i class="el-icon-caret-bottom" />
+    </div>
     <el-dropdown-menu class="avatar-menu">
       <el-dropdown-item icon="el-icon-user-solid">我的主页</el-dropdown-item>
       <el-dropdown-item icon="el-icon-star-on">喜欢的文章</el-dropdown-item>
       <el-dropdown-item icon="el-icon-s-tools">设置</el-dropdown-item>
-      <el-dropdown-item icon="el-icon-remove" command="logout">退出</el-dropdown-item>
+      <el-dropdown-item icon="el-icon-remove" command="logout"
+        >退出</el-dropdown-item
+      >
     </el-dropdown-menu>
   </el-dropdown>
 </template>
@@ -36,6 +41,10 @@ export default class NavAvatar extends Vue {
 
 <style lang="scss">
 @import "@/style/variable.scss";
+.avatar-down {
+  display: flex;
+  align-items: center;
+}
 .avatar-menu {
   * {
     font-size: $titleSize;

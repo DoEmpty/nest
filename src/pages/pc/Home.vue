@@ -1,27 +1,36 @@
 <template>
-  <div class="home-container">
-    <ArticleSummary
-      v-for="article in articles"
-      v-bind:key="article.id"
-      :article="article"
-    />
-    <p v-if="isLoading">
-      <i class="el-icon-loading" />
-      加载中...
-    </p>
-    <p v-if="loadFinished">没有更多了</p>
+  <div class="container">
+    <Nav />
+    <div class="home-container">
+      <div class="left">
+        <article-summary
+          v-for="article in articles"
+          v-bind:key="article.id"
+          :article="article"
+        />
+        <p v-show="isLoading">
+          <i class="el-icon-loading" />
+          加载中...
+        </p>
+        <p v-if="loadFinished">没有更多了</p>
+      </div>
+      <div class="right"></div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import Nav from "@/components/pc/Nav.vue";
 import ArticleSummary from "@/components/pc/ArticleSummary.vue";
 import { IArticle, IQuery } from "@/tsConstraint/interface";
 import { getArticles } from "@/apis/articleApi";
+import { registScrollEvent } from "@/utils/util";
 
 @Component({
   components: {
-    ArticleSummary
+    ArticleSummary,
+    Nav
   }
 })
 export default class Home extends Vue {
@@ -35,43 +44,19 @@ export default class Home extends Vue {
 
   mounted() {
     this.queryArticle();
-    window.onscroll = e => {
-      // console.log("getScrollTop()",this.getScrollTop());
-      // console.log("getWindowHeight()",this.getWindowHeight());
-      // console.log("getScrollHeight()",this.getScrollHeight());
+    registScrollEvent(scrollParam => {
       if (
-        this.getScrollTop() + this.getWindowHeight() >=
-          this.getScrollHeight() - 10 &&
+        Math.abs(
+          scrollParam.scrollTop +
+            scrollParam.windowHeight -
+            scrollParam.scrollHeight
+        ) < 10 &&
         !this.loadFinished
       ) {
         console.log("到页面底部了");
         this.queryArticle();
       }
-    };
-  }
-
-  // 获取滚动高度
-  getScrollTop() {
-    const bodyScrollTop = document.body.scrollTop;
-    const eleScrollTop = document.documentElement.scrollTop;
-    return bodyScrollTop || eleScrollTop;
-  }
-
-  //获取文档总高度
-  getScrollHeight() {
-    const bodyScrollHeight = document.body.scrollHeight;
-    const eleScrollHeight = document.documentElement.scrollHeight;
-    return bodyScrollHeight - eleScrollHeight > 0
-      ? bodyScrollHeight
-      : eleScrollHeight;
-  }
-
-  //获取窗口高度
-  getWindowHeight() {
-    if (document.compatMode === "CSS1Compat") {
-      return document.documentElement.clientHeight;
-    }
-    return document.body.clientHeight;
+    });
   }
 
   queryArticle() {
@@ -95,7 +80,8 @@ export default class Home extends Vue {
 <style lang="scss" scoped>
 @import "@/style/variable.scss";
 .home-container {
-  flex-grow: 1;
+  margin: 0.8rem auto 0 auto;
+  display: flex;
   p {
     text-align: center;
     color: $lightColor;
